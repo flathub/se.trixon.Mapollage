@@ -1,6 +1,6 @@
 id: se.trixon.Mapollage
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: start-mapollage
 separate-locales: false
@@ -16,21 +16,23 @@ build-options:
     env:
         - name=mapollage
 cleanup:
-  - '/mapollage/start-mapollage'    
-  - '/mapollage/se.trixon.Mapollage.desktop'    
-  - '/mapollage/se.trixon.Mapollage.metainfo.xml'    
-  - '/mapollage/ide/modules/lib'    
-  - '/mapollage/platform/lib/nbexec*.*'    
-  - '/mapollage/platform/modules/lib/*.d*'    
-  - '/mapollage/platform/modules/lib/amd64/*.d*'    
-  - '/mapollage/platform/modules/lib/aarch64'    
-  - '/mapollage/platform/modules/lib/i386'    
-  - '/mapollage/platform/modules/lib/riscv64'    
-  - '/mapollage/platform/modules/lib/x86'    
+  - '/mapollage/start-mapollage'
+  - '/mapollage/se.trixon.Mapollage.desktop'
+  - '/mapollage/se.trixon.Mapollage.metainfo.xml'
+  - '/mapollage/ide/modules/lib'
+  - '/mapollage/platform/lib/nbexec*.*'
+  - '/mapollage/platform/modules/lib/*.d*'
+  - '/mapollage/platform/modules/lib/amd64/*.d*'
+  - '/mapollage/platform/modules/lib/aarch64'
+  - '/mapollage/platform/modules/lib/i386'
+  - '/mapollage/platform/modules/lib/riscv64'
+  - '/mapollage/platform/modules/lib/x86'
 
 modules:
   - name: mapollage
     buildsystem: simple
+    build-options:
+      no-debuginfo: true
     build-commands:
       - install -dm755 /app/bin
       - install -dm755 /app/$name
@@ -57,5 +59,3 @@ modules:
         dest-filename: start-mapollage
         commands:
           - exec /app/mapollage/bin/mapollage --userdir $HOME/.var/app/se.trixon.Mapollage/config/mapollage --cachedir $HOME/.var/app/se.trixon.Mapollage/cache/mapollage "$@"
-    build-options:
-      no-debuginfo: true
